@@ -3,17 +3,23 @@ const mongoose=require('mongoose');
 const User = require('../models/User');
 const dbconnectFlag=false;
 
+//error formatter
+
+const errorFormatter=e=>{
+    let  errors={};
+    const allErrors=e.substring(e.indexOf(':')+1).trim().split(',').map(err=>err.trim());
+    allErrors.forEach(err=>{
+        const[key,value]=err.split(':').map(err=>err.trim());
+        errors[key]=value;
+    });
+
+    return errors;
+}
 //db
 
 const {body,validationResult}=require('express-validator');
 const create=(req,res)=>{
-    body('email').isEmail();
-    body('password').isLength({min:6});
-    const errors=validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(404).json({errors:errors.array()});
-    }
-    else{
+
         console.log("creating account");
         const arg=req.body;
         console.log(arg);
@@ -31,9 +37,12 @@ const create=(req,res)=>{
         user.save().then(result=>{
             res.send(result);
         }).catch(err=>{
-            console.log(err);
+            const er=errorFormatter(err.message);
+            console.log(er);
+            res.send(er);
+
         });
-    }
+       
    
 };
 

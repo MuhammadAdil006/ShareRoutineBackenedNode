@@ -4,36 +4,36 @@ const validator=require('validator');
 const UserSchema= new schema({
     firstName:{
         type:String,
-        required:true
+        required:[true,"first name is required"]
     },
     lastName:{
         type:String,
-        required:true
+        required:[true,"last name is required"]
     },
     email:{
         type:String,
-        required:true,
+        required:[true,"email is required"],
         unique:true,
     },
     password:{
         type:String,
-        required:true
+        required:[true,"password is required"],
     },
     Day:{
         type:Number,
-        required:true
+        required:[true,"day is required"]
     },
     Month:{
         type:Number,
-        required:true
+        required:[true,"month is required"]
     },
     Year:{
         type:Number,
-        required:true
+        required:[true,"year is required"]
     },
     Gender:{
         type:String,
-        required:true
+        required:[true,"gender is required"]
     }
 },{timestamps:true});
 

@@ -12,15 +12,7 @@ a{
 .main{
     height: 90vh;
 }
-.login-logo{
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    background: url('../YourRoutinelogo.png');
-    background-size: 100px 100px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+
 .login-card{
     background-color:#ffffff;
 }

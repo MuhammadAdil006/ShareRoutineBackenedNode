@@ -16,6 +16,11 @@
 
     <body onload="hideLoadingDiv()" id="sign-in">
         <div class=" container">
+            <% if(message==3){%>
+                <div  class="alert alert-danger ">
+                    <strong>Ooops!</strong> Wrong Credentials
+                </div>
+                <%}%>
             <% if(message==2){%>
                  <div  class="alert alert-success ">
                      <strong>Success!</strong> You are successfully registered.
@@ -36,7 +41,7 @@
                             <h1 class="text-center">Login</h1>
                         </div>
                         <div class=" col-md-12">
-                            <form action="/Home/SignIn" method="post">
+                            <form action="/SignInAccount" method="post">
                                 <div class="form-group mt-3">
 
                                     <input type="email" class="form-control" name="email" id="SignInemail"

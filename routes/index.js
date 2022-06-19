@@ -5,6 +5,7 @@ const signUp=require('../controllers/signUp');
 
 
 route.get('/',signIn.index);
+route.post('/SignInAccount',signIn.signIn);
 route.post('/SignUp',signUp.create);
 
 

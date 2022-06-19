@@ -9,5 +9,4 @@ route.post('/SignUp',signUp.create);
 
 
 
-
 module.exports=route;

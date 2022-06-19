@@ -1,15 +1,36 @@
 <html>
 <head>
     <%- include('partials/head.ejs') %>
-    <link rel="stylesheet" href="../css/login.css">
+    <!-- <script>
+        function hideLoadingDiv() {
+    setTimeout(function () {
+        document.getElementById('msg').classList.add('hidden');
+    }, 2000); 
+    console.log("in hide loading div");
+    // setTimeout(function() {
+    //     $('#msg').fadeOut('fast');
+    // }, 2000); // <-- time in milliseconds
+}
+    </script> -->
 </head>
 
-    <body id="sign-in">
+    <body onload="hideLoadingDiv()" id="sign-in">
         <div class=" container">
+            <% if(message==2){%>
+                 <div  class="alert alert-success ">
+                     <strong>Success!</strong> You are successfully registered.
+                 </div>
+             <%} if(message==1) {%>
+                 <div id="msg" class="alert alert-danger">
+                     <strong>Info!</strong> error.You are not registered successfully.
+                 </div>
+             <%}%>
+ 
             <div class="row  main justify-content-center  mt-5">
                 <div class="col-xl-5 rounded shadow login-card ">
                     <div class="row justify-content-center my-5">
-                        <div class="col-md-12 Login-Logo">
+                        <div class="col-md-12 logoimage">
+                        
                         </div>
                         <div class="col-md-12">
                             <h1 class="text-center">Login</h1>
@@ -35,7 +56,7 @@
                             </form>
                             <!-- @if((Model.firstname=="" && Model.New_password=="")&&Model.id==-2)
                         {
-                            
+
                         }
                         else{
                             @if(Model.id==-1 &&(Model.firstname=="" && Model.New_password==""))
@@ -98,38 +119,46 @@
 
                                                         <!-- <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name"> -->
 
-                                                        <input type="text" class="form-control" name="firstname"
+                                                        <input  type="text" class="form-control" name="firstname"
                                                             id="firstname" placeholder="First Name">
-                                                        <span class="text-danger"></span>
+                                                            <% if(er.firstName !=undefined){%>
+                                                        <span id="firstnameerror" class="text-danger"><%=er.firstName%></span>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group mt-3">
-                                                        <input type="text" class="form-control" name="lastname"
+                                                        <input  type="text" class="form-control" name="lastname"
                                                             id="lastname" placeholder="Last Name">
-                                                        <span class="text-danger"></span>
+                                                            <% if(er.lastName !=undefined){%>
+                                                        <span id="lastnameerror" class="text-danger"><%=er.lastName%></span>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group mt-3">
-                                                <input type="email" class="form-control" name="email" id="email"
+                                                <input  type="email" class="form-control" name="email" id="email"
                                                     placeholder="Enter email">
-                                                <span class="text-danger"></span>
+                                                    <% if(er.email !=undefined){%>
+                                                <span  id="emailerror" class="text-danger"><%=er.email%></span>
+                                                <%}%>
                                             </div>
                                             <div class="form-group mt-3">
 
-                                                <input type="password" class="form-control" name="New_password"
+                                                <input  type="password" class="form-control" name="New_password"
                                                     id="New_password" placeholder="New Password">
-                                                <span class="text-danger"></span>
+                                                    <% if(er.password !=undefined){%>
+                                                <span class="text-danger"><%=er.password%></span>
+                                                <%}%>
                                             </div>
 
                                             <div class="row">
-                                                <span class="col-12 ms-2 pt-2 fs-7 text-muted">date of birth</span>
+                                                <span id="datebirtherror" class="col-12 ms-2 pt-2 fs-7 text-muted">date of birth</span>
                                                 <div class="col-4">
 
                                                     <div class="form-group mt-3">
-                                                        <select class="form-control" name="day" id="day">
+                                                        <select required class="form-control" name="day" id="day">
                                                             <option value="">Day</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -168,7 +197,7 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="form-group mt-3">
-                                                        <select class="form-control" name="month" id="month">
+                                                        <select required class="form-control" name="month" id="month">
                                                             <option value="">Month</option>
                                                             <option value="1">January</option>
                                                             <option value="2">February</option>
@@ -187,7 +216,7 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="form-group mt-3">
-                                                        <select class="form-control" name="year" id="year">
+                                                        <select required class="form-control" name="year" id="year">
                                                             <option value="">Year</option>
                                                             <option value="1940">1940</option>
                                                             <option value="1941">1941</option>
@@ -279,13 +308,14 @@
                                             </div>
                                             <span class="col-12 ms-2 pt-2 fs-7 text-muted" for="gender">Select
                                                 Gender</span>
+
                                             <div class="row w-90 mx-auto justify-content-evenly">
 
 
                                                 <div class="col-4 ">
                                                     <div class="form-group px-2 py-2">
                                                         <label for="gender">Male</label>
-                                                        <input type="radio" selected name="gender" id="genderradioM"
+                                                        <input type="radio"  name="gender" id="genderradioM"
                                                             value="male">
                                                     </div>
                                                 </div>
@@ -300,9 +330,12 @@
                                                     <div class="form-group  px-2 py-2">
                                                         <label for="gender">Custom</label>
                                                         <input type="radio" name="gender" value="other">
+
                                                     </div>
                                                 </div>
-                                                <span class="text-danger" asp-validation-for="gender"></span>
+                                                <% if(er.Gender !=undefined){%>
+                                                    <span class="text-danger" > <%=er.Gender%>  </span>
+                                                    <%}%>
 
                                             </div>
 

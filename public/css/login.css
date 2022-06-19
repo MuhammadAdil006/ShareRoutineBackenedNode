@@ -1,9 +1,10 @@
-.Login-Logo{
+.logoimage{
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    background: url('../images/logo/YourRoutinelogo.png');
+    background: url('/images/logo/YourRoutinelogo.png');
     background-size: 100px 100px;
     background-repeat: no-repeat;
     background-position: center;
+    color:#00ffff;
 }
